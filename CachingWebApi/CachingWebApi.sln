@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CachingWebApi", "CachingWebApi\CachingWebApi.csproj", "{60015706-A511-4EFA-8129-55AFF9249706}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60015706-A511-4EFA-8129-55AFF9249706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60015706-A511-4EFA-8129-55AFF9249706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60015706-A511-4EFA-8129-55AFF9249706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60015706-A511-4EFA-8129-55AFF9249706}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
