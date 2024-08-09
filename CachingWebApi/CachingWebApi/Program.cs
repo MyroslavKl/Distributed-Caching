@@ -1,6 +1,8 @@
 using CachingWebApi.Data;
+using CachingWebApi.Repository;
 using CachingWebApi.Services;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Core.Types;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +17,7 @@ builder.Services.AddEntityFrameworkNpgsql()
         .Configuration.GetConnectionString("Database")));
 
 builder.Services.AddScoped<ICacheService, CacheService>();
-
+builder.Services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

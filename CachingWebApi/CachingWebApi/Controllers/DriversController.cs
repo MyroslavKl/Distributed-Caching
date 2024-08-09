@@ -1,5 +1,6 @@
 using CachingWebApi.Data;
 using CachingWebApi.Models;
+using CachingWebApi.Repository;
 using CachingWebApi.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,13 @@ namespace CachingWebApi.Controllers
     {
         private readonly ICacheService _cacheService;
         private readonly AppDbContext _context;
+        private readonly IRepository<Driver> _driverRepository;
 
-        public DriversController(ICacheService cacheService,AppDbContext context)
+        public DriversController(ICacheService cacheService,AppDbContext context,IRepository<Driver> driverRepository)
         {
             _cacheService = cacheService;
             _context = context;
+            _driverRepository = driverRepository;
         }
 
         [HttpGet("drivers")]
@@ -29,7 +32,7 @@ namespace CachingWebApi.Controllers
                 return Ok(cacheData);
             }
 
-            cacheData = await _context.Drivers.ToListAsync();
+            cacheData = await _driverRepository.GetAll();
 
             var expirationTime = DateTime.Now.AddSeconds(30);
             _cacheService.SetData("drivers",cacheData,expirationTime);
@@ -39,12 +42,11 @@ namespace CachingWebApi.Controllers
         [HttpPost("AddDrivers")]
         public async Task<IActionResult> Post(Driver driver)
         {
-            var addObj = await  _context.Drivers.AddAsync(driver);
+            var addObj = await  _driverRepository.Add(driver);
             var expirationTime = DateTime.Now.AddSeconds(30);
             _cacheService.SetData($"driver{driver.Id}",addObj.Entity,expirationTime);
-
-            await _context.SaveChangesAsync();
-            return Ok(addObj.Entity);
+            
+            return Ok();
         }
 
         [HttpDelete("DeleteDriver")]
@@ -53,9 +55,8 @@ namespace CachingWebApi.Controllers
             var exist =await  _context.Drivers.FirstOrDefaultAsync(x => x.Id == id);
             if (exist != null)
             {
-                _context.Drivers.Remove(exist);
+                await _driverRepository.Remove(exist);
                 _cacheService.RemoveData($"driver{id}");
-                await _context.SaveChangesAsync();
                 return NoContent();
             }
 
