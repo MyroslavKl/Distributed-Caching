@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Configuration;
+using System.Text.Json;
 using Microsoft.AspNetCore.Connections;
 using StackExchange.Redis;
 
@@ -6,11 +7,13 @@ namespace CachingWebApi.Services;
 
 public class CacheService:ICacheService
 {
-    private IDatabase _cacheDb;
+    private readonly IDatabase _cacheDb;
+    private readonly IConfiguration _configuration;
 
-    public CacheService()
+    public CacheService(IConfiguration configuration)
     {
-        var redis = ConnectionMultiplexer.Connect("localhost:6379");
+        _configuration = configuration;
+        var redis = ConnectionMultiplexer.Connect(_configuration["Redis:Connection"]);
         _cacheDb = redis.GetDatabase();
     }
     public T GetData<T>(string key)

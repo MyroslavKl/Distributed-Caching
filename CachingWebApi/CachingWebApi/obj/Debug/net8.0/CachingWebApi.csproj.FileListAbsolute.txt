@@ -237,3 +237,4 @@ F:\RedisBasics\Redis\CachingWebApi\CachingWebApi\bin\Debug\net8.0\runtimes\win\l
 F:\RedisBasics\Redis\CachingWebApi\CachingWebApi\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 F:\RedisBasics\Redis\CachingWebApi\CachingWebApi\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 F:\RedisBasics\Redis\CachingWebApi\CachingWebApi\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+F:\RedisBasics\Redis\CachingWebApi\CachingWebApi\obj\Debug\net8.0\CachingWebApi.sourcelink.json
